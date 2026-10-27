@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loncat Indah: Fisika di Udara</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f4fc;--panel:#ffffff;--ink:#3d3a5c;--mute:#706d92;--c1:#bde0fe;--c2:#ffc8dd;--c3:#ffe0b8;--blue:#a2d2ff;--a1:#4b78b5;--a2:#b0507e;--line:#e6def2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#26233a;--panel:#322e4d;--ink:#f5f0ff;--mute:#bdb7da;--a1:#a2d2ff;--a2:#ffc8dd;--line:#4a4570;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;background:var(--bg)}
+main{max-width:920px;margin:0 auto;padding:22px 16px 64px}
+h1{font-size:clamp(2.1rem,8vw,3.4rem);line-height:1.03;margin:6px 0 8px;font-weight:800;color:var(--a2)}
+.sub{color:var(--mute);margin:0 0 16px;font-size:1.05rem;max-width:62ch}
+.stage{border-radius:26px;overflow:hidden;background:#efe6f8;box-shadow:0 0 0 1px var(--line),0 22px 40px -26px rgba(70,60,140,.45)}
+.stage svg{display:block;width:100%;height:auto;cursor:pointer}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+button{font:inherit}
+.bar button,.try,#open{border:1px solid var(--line);font-weight:600;padding:8px 15px;border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.bar button:hover,.try:hover{transform:translateY(-2px)}
+.bar button[aria-pressed="true"]{background:var(--c2);color:#3a1230;border-color:transparent}
+#open{background:var(--c2);color:#3a1230;border:0;font-size:1.1rem;padding:12px 26px}
+button:focus-visible{outline:3px solid var(--c3);outline-offset:2px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:8px 0}
+.ctl label{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-size:.92rem}
+.ctl input{width:100%;accent-color:var(--c2);margin-top:6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px 12px}
+.tile small{color:var(--mute);display:block;font-size:.78rem}
+.tile b{font-size:1.3rem;color:var(--a1)}
+.eb{margin:12px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.eb div{display:flex;align-items:center;gap:10px;font-size:.88rem;margin:4px 0}
+.eb span{width:130px;flex:0 0 auto}
+.eb i{display:block;height:12px;border-radius:6px;transition:width .08s}
+#sc{background:var(--panel);border:1px solid var(--c2);border-radius:18px;padding:12px 16px;margin:10px 0}
+.j{display:inline-block;min-width:46px;text-align:center;margin:3px;padding:6px 10px;border-radius:10px;background:var(--c1);color:#041018;font-weight:800}
+.j.x{opacity:.35;text-decoration:line-through}
+h2{font-size:1.3rem;margin:32px 0 8px}
+section.card,.cc{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px 20px;margin:12px 0;border-left:7px solid var(--c1);backdrop-filter:blur(8px)}
+.cc:nth-of-type(even){border-left-color:var(--c2)}
+.cc h3{margin:0 0 4px;font-size:1.05rem;color:var(--a2)}
+.f{display:block;background:color-mix(in srgb,var(--blue) 18%,transparent);border-radius:10px;padding:6px 12px;margin:6px 0;font-family:ui-monospace,Menlo,monospace;font-size:.9rem;overflow-x:auto;white-space:nowrap}
+p,li{max-width:70ch}
+ol,ul{padding-left:20px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{font-size:.88rem;color:var(--mute)}
+.try{font-size:.85rem;padding:5px 12px;margin-top:4px}
+svg text{font-family:inherit}
+.ring{transform-box:fill-box;transform-origin:center;animation:ring 1.1s ease-out forwards}
+@keyframes ring{from{transform:scale(.1);opacity:1}to{transform:scale(1.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>Loncat Indah: Fisika di Udara</h1>
+<p class="sub">Pilih gaya tubuh, lalu lihat bagaimana lintasan, putaran, dan energi penyelam berubah. Gerak diputar lambat 0,5× agar mudah diikuti.</p>
+
+<div class="stage">
+<svg viewBox="0 0 400 320" role="img" aria-label="Simulasi penyelam menara dengan lintasan parabola dan bayangan tiap 0,2 detik">
+<rect width="400" height="320" fill="#efe6f8"/><circle cx="340" cy="50" r="24" fill="#ffe0b8"/>
+<path d="M0 290V274q10 -14 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V290Z" fill="#cdb4db"/>
+<rect id="tw" x="30" y="107" width="16" height="183" fill="#a2d2ff"/><rect id="pf" x="30" y="102" width="62" height="6" rx="3" fill="#ffafcc"/>
+<path id="par" fill="none" stroke="#8a84dc" stroke-width="2.2" stroke-dasharray="1 6" stroke-linecap="round"/>
+<g id="gh"></g>
+<g id="dv"><circle cx="0" cy="-15" r="3.6" fill="#ffd9b0"/><path id="dp" fill="none" stroke="#e0588a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect y="290" width="400" height="30" fill="#a2d2ff" opacity=".9"/>
+<path d="M0 292q25 -8 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0" fill="none" stroke="#fff" stroke-width="2" opacity=".8"><animateTransform attributeName="transform" type="translate" values="0 0;-100 0" dur="3s" repeatCount="indefinite"/></path>
+<g id="sp"></g>
+<text x="14" y="24" font-size="13" font-weight="700" fill="#2b2d42" id="ph">Siap</text>
+<text x="14" y="42" font-size="11" fill="#4a4d6e">Titik-titik = lintasan titik berat (parabola)</text>
+<text x="14" y="58" font-size="11" fill="#4a4d6e">Bayangan = posisi tiap 0,2 detik</text>
+</svg>
+</div>
+
+<div class="bar" id="modes" role="group" aria-label="Pilih gaya tubuh">
+<button data-m="real" aria-pressed="true">Meringkuk lalu lurus</button>
+<button data-m="tuck" aria-pressed="false">Meringkuk (tuck)</button>
+<button data-m="pike" aria-pressed="false">Menekuk (pike)</button>
+<button data-m="lurus" aria-pressed="false">Lurus</button>
+<button id="slow" aria-pressed="true">Gerak lambat</button>
+<button data-m="game" aria-pressed="false">🎮 Tantangan juri</button><button id="again">Ulangi</button>
+</div>
+
+<div class="ctl"><label>Tinggi menara: <b id="lh">10</b> m<input type="range" id="sh" min="3" max="10" step=".5" value="10"></label><label>Tolakan ke atas: <b id="lv">3,5</b> m/s<input type="range" id="sv" min="2" max="4.5" step=".1" value="3.5"></label></div>
+<div class="tiles" style="margin-bottom:8px"><div class="tile"><small>Waktu terbang (s)</small><b id="rT">-</b></div><div class="tile"><small>Kecepatan masuk air (m/s)</small><b id="rV">-</b></div><div class="tile"><small>Putaran terencana</small><b id="rS">-</b></div></div>
+<div class="bar"><button id="open" hidden>Buka tubuh!</button></div><div id="sc" hidden></div>
+<div class="tiles">
+<div class="tile"><small>Waktu (s)</small><b id="vt">0,00</b></div>
+<div class="tile"><small>Tinggi titik berat (m)</small><b id="vh">10,0</b></div>
+<div class="tile"><small>Kecepatan (m/s)</small><b id="vv">0,0</b></div>
+<div class="tile"><small>Kecepatan putar (putaran/s)</small><b id="vw">0,00</b></div>
+<div class="tile"><small>Total putaran</small><b id="vr">0,00</b></div>
+</div>
+<div class="eb"><div><span>Energi potensial</span><i id="bp" style="background:#7db8f0;width:100%"></i></div><div><span>Energi kinetik</span><i id="bk" style="background:#ff9dc0;width:0"></i></div>
+<p class="note" style="margin:4px 0 0">Saat tinggi berkurang, energi potensial berubah menjadi energi kinetik. Jumlah keduanya tetap (hambatan udara diabaikan).</p></div>
+<p class="note">Model disederhanakan: massa 60 kg, tinggi titik berat 10 m di atas air, kecepatan tolakan ke atas 3,5 m/s dan ke depan 1,8 m/s. Momen inersia (tuck 3,5; pike 6,5; lurus 14 kg·m²) dan momentum sudut 45 kg·m²/s adalah nilai pendekatan untuk ilustrasi, bukan hasil pengukuran atlet tertentu.</p>
+
+<h2>Tebak dulu!</h2>
+<div class="cc" id="qz"><p><b>Penyelam yang sedang berputar di udara meringkuk lebih rapat. Apa yang terjadi?</b></p><div class="bar"><button data-q="0">Putaran melambat</button><button data-q="1">Putaran makin cepat</button><button data-q="2">Lintasan titik berat berubah</button></div><p id="qa" class="note">Pilih jawabanmu, lalu buktikan di simulasi.</p></div>
+<h2>1. Sejarah</h2>
+
+<section class="card">
+<p>Loncat indah berkembang dari latihan para pesenam di Jerman dan Swedia pada abad ke-19 yang melompat ke air sebagai latihan dan atraksi. Olahraga ini masuk Olimpiade modern pada 1904 (St. Louis) untuk putra, nomor papan loncat ditambahkan pada 1908, dan putri mulai bertanding pada 1912 (Stockholm). Nomor sinkron muncul di Olimpiade Sydney 2000.</p>
+<p>Kini dua perangkat utama adalah papan lentur 1 m dan 3 m (springboard) serta menara kaku 10 m (platform). Induk organisasinya adalah World Aquatics, dahulu bernama FINA.</p>
+</section>
+
+<h2>2. Tahapan</h2>
+<section class="card"><ol>
+<li><b>Posisi awal atau awalan</b>: di papan lentur penyelam berjalan beberapa langkah lalu melompat (hurdle). Di menara, penyelam berdiri diam di tepi, atau berdiri dengan tangan (armstand).</li>
+<li><b>Tolakan (take-off)</b>: kaki menekan papan atau menara untuk menghasilkan kecepatan ke atas sekaligus putaran awal.</li>
+<li><b>Fase melayang</b>: penyelam mengambil bentuk tuck (meringkuk), pike (menekuk di pinggul dengan kaki lurus), atau straight (lurus) sambil berputar atau memuntir.</li>
+<li><b>Persiapan masuk</b>: tubuh dibuka dan diluruskan, mata mencari permukaan air.</li>
+<li><b>Masuk air (entry)</b>: tubuh lurus dan vertikal dengan jari tangan atau kaki lebih dulu, percikan sekecil mungkin. Juri menilai seluruh tahap.</li>
+</ol></section>
+
+<h2>3. Konsep mekanika</h2>
+
+<div class="cc"><h3>Gerak parabola</h3>
+<code class="f">x = v₀ₓ·t &nbsp; | &nbsp; y = h₀ + v₀ᵧ·t − ½·g·t²</code>
+<p>Setelah kaki lepas dari papan, hanya gravitasi yang bekerja pada penyelam (hambatan udara kecil diabaikan). Karena itu titik berat selalu bergerak mengikuti parabola yang sudah ditentukan saat tolakan. Mengubah pose di udara tidak mengubah lintasan titik berat. Dengan h₀ = 10 m dan v₀ᵧ = 3,5 m/s, waktu sampai air t = (v₀ᵧ + √(v₀ᵧ² + 2g·h₀))/g ≈ 1,83 s, dan penyelam hanya naik v₀ᵧ²/2g ≈ 0,63 m dari tepi menara.</p></div>
+
+<div class="cc"><h3>Kekekalan energi mekanik</h3>
+<code class="f">E = m·g·h + ½·m·v² = konstan</code>
+<p>Energi potensial berubah menjadi energi kinetik saat penyelam turun. Kecepatan saat mencapai air v = √(v₀² + 2g·h₀) = √(3,5² + 1,8² + 2·9,8·10) ≈ 14,5 m/s, sekitar 52 km/jam, dan tidak bergantung pada massa penyelam.</p></div>
+
+<div class="cc"><h3>Kekekalan momentum sudut</h3>
+<code class="f">L = I·ω = konstan &nbsp; | &nbsp; I = Σ m·r²</code>
+<p>Di udara tidak ada torsi luar, sebab gravitasi bekerja di titik berat sehingga lengan gayanya nol. Akibatnya momentum sudut L tetap. Saat penyelam meringkuk, massa tubuh mendekati sumbu putar sehingga momen inersia I mengecil, maka kecepatan putar ω membesar. Sebaliknya, tubuh yang dibuka punya I besar dan putarannya melambat. Untuk L ≈ 45 kg·m²/s: tuck (I ≈ 3,5) memberi ω ≈ 12,9 rad/s (±2,05 putaran/s), pike (I ≈ 6,5) memberi ≈ 6,9 rad/s (±1,10 putaran/s), dan lurus (I ≈ 14) memberi ≈ 3,2 rad/s (±0,51 putaran/s).</p></div>
+
+<div class="cc"><h3>Torsi dan impuls sudut saat tolakan</h3>
+<code class="f">ΔL = τ·Δt = (F × d)·Δt</code>
+<p>Putaran awal dihasilkan di papan atau menara. Jika gaya reaksi dari pijakan tidak melewati titik berat (ada lengan d), muncul torsi yang memberi momentum sudut. Jadi jumlah putaran sudah ditentukan saat tolakan, lalu di udara penyelam hanya mengatur kecepatannya lewat perubahan bentuk tubuh. Pemuntiran (twist) dihasilkan dengan memiringkan badan dan menggeser lengan sehingga sebagian momentum sudut berpindah ke sumbu panjang tubuh.</p></div>
+
+<div class="cc"><h3>Hukum III Newton, impuls-momentum, dan Hooke</h3>
+<code class="f">F<sub>aksi</sub> = −F<sub>reaksi</sub> &nbsp; | &nbsp; F·Δt = m·Δv &nbsp; | &nbsp; F = k·x</code>
+<p>Kaki mendorong papan ke bawah, papan mendorong balik penyelam ke atas. Papan 3 m yang lentur berperan seperti pegas: penyelam menekannya lalu energi pegas ½·k·x² dikembalikan sehingga lompatan lebih tinggi. Menara 10 m kaku, jadi tolakannya sepenuhnya berasal dari otot kaki.</p></div>
+
+<div class="cc"><h3>Hambatan fluida saat masuk air</h3>
+<code class="f">F<sub>hambat</sub> = ½·ρ·C<sub>d</sub>·A·v²</code>
+<p>Air memperlambat penyelam dengan gaya yang bergantung pada luas penampang A. Masuk dengan tubuh lurus membuat A kecil dan memperkecil percikan, yang dinilai sebagai entry yang baik.</p></div>
+
+<h2>4. Latihan singkat</h2>
+<details><summary>Soal 1: Penyelam meringkuk dengan I = 3,5 kg·m² dan ω = 12,9 rad/s lalu meluruskan tubuh hingga I = 14 kg·m². Berapa ω sekarang?</summary>
+<p>L tetap, jadi I₁ω₁ = I₂ω₂. ω₂ = (3,5 × 12,9)/14 ≈ 3,2 rad/s. Putaran melambat sekitar 4 kali.</p></details>
+<details><summary>Soal 2: Berapa kecepatan penyelam saat mencapai air jika jatuh bebas dari 10 m tanpa kecepatan awal?</summary>
+<p>v = √(2·g·h) = √(2 × 9,8 × 10) ≈ 14 m/s, sekitar 50 km/jam.</p></details>
+
+<h2>5. Rujukan yang bisa dicari</h2>
+<section class="card"><ul>
+<li>Halliday, Resnick &amp; Walker, <i>Fundamentals of Physics</i> (bab gerak parabola, energi, dan momentum sudut).</li>
+<li>Serway &amp; Jewett, <i>Physics for Scientists and Engineers</i> (bab rotasi dan momentum sudut).</li>
+<li>Hay, J. G., <i>The Biomechanics of Sports Techniques</i>.</li>
+<li>Frohlich, C. (1980), “The physics of somersaulting and twisting”, <i>Scientific American</i>.</li>
+<li>Laman World Aquatics dan Olympedia untuk sejarah dan aturan.</li>
+</ul>
+<p class="note">Periksa dulu edisi, bab, dan halaman sebelum mengutip. Untuk artikel jurnal, cari di Google Scholar atau Garuda dengan kata kunci “biomechanics of diving”, “angular momentum somersault”, atau “biomekanika loncat indah”.</p></section>
+</main>
+
+<script>
+let H0=10,VY=3.5;const $=id=>document.getElementById(id),g=9.8,VX=1.8,m=60,LM=45,K=20,YW=290,X0=90;
+const POSE={tuck:{a:140,b:130,I:3.5},pike:{a:125,b:0,I:6.5},lurus:{a:0,b:0,I:14}};
+let T,ET;
+const fmt=(x,n)=>x.toFixed(n).replace('.',',');
+let opened=false,tT=1,best=0,t=0,th=0,a=0,b=0,I=14,run=false,last=0,mode='real',slow=true,sn=0,timer;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function recalc(){T=(VY+Math.sqrt(VY*VY+2*g*H0))/g;ET=m*g*H0+.5*m*(VX*VX+VY*VY);
+const mx=LM/3.5*T/(2*Math.PI)*.9,tg=Math.max(.5,Math.floor(mx-.5)+.5);tT=Math.min(T,Math.max(.05,(tg*2*Math.PI-LM/14*T)/(LM/3.5-LM/14)));
+const ty=YW-H0*K+17;$('pf').setAttribute('y',ty-5);$('tw').setAttribute('y',ty);$('tw').setAttribute('height',YW-ty);
+$('par').setAttribute('d',Array.from({length:31},(_,i)=>{const s=T*i/30;return(i?'L':'M')+(X0+VX*s*K).toFixed(1)+' '+(YW-(H0+VY*s-.5*g*s*s)*K).toFixed(1)}).join(''));
+$('rT').textContent=fmt(T,2);$('rV').textContent=fmt(Math.sqrt(VX*VX+VY*VY+2*g*H0),1);$('rS').textContent=fmt(tg,1)+'×'}
+function score(){if(mode!=='game')return;const d=Math.abs((((th-Math.PI)%(2*Math.PI))+3*Math.PI)%(2*Math.PI)-Math.PI)*180/Math.PI;
+let s=Math.max(0,Math.round((10-d/6)*2)/2),tk=a>25;if(tk)s=Math.max(0,s-3);
+const js=[-.5,0,.5,-1,.5].map(o=>Math.min(10,Math.max(0,s+o))),lo=js.indexOf(Math.min(...js)),hi=js.lastIndexOf(Math.max(...js)),avg=js.filter((_,i)=>i!==lo&&i!==hi).reduce((x,y)=>x+y,0)/3;best=Math.max(best,avg);
+const msg=tk?'Tubuh masih meringkuk saat masuk air.':s>=9?'Entry nyaris sempurna!':s>=7?'Bagus, sedikit miring.':'Masuk air miring. Coba buka tubuh lebih awal atau lebih lambat.';
+$('sc').hidden=false;$('sc').innerHTML=`<b>Nilai juri</b> (tertinggi dan terendah dibuang)<br>${js.map((x,i)=>`<span class="j${i===lo||i===hi?' x':''}">${fmt(x,1)}</span>`).join('')}<br>Rata-rata: <b>${fmt(avg,2)}</b> &nbsp; Terbaik: <b>${fmt(best,2)}</b><br>${msg} Sudut masuk meleset ${Math.round(d)}° dari tegak lurus.`}
+function fig(a,b){const r=Math.PI/180,sa=Math.sin(a*r),ca=Math.cos(a*r),Kn=[8*sa,8*ca],be=(a-b)*r,An=[Kn[0]+8*Math.sin(be),Kn[1]+8*Math.cos(be)],c=Math.min(1,a/125),f=1-b/130,tg=[Kn[0]+(An[0]-Kn[0])*f,Kn[1]+(An[1]-Kn[1])*f],O=[1,-24],hd=[O[0]+(tg[0]-O[0])*c,O[1]+(tg[1]-O[1])*c];
+return`M0 -11L0 0L${Kn}L${An}M0 -11L${hd}`}
+function tgt(){let k=mode;if(mode==='real')k=t<tT?'tuck':'lurus';else if(mode==='game')k=opened?'lurus':'tuck';return POSE[k]}
+function draw(h){const x=X0+VX*t*K,y=YW-h*K,d=fig(a,b),tr=`translate(${x} ${y}) rotate(${th*180/Math.PI})`;
+$('dv').setAttribute('transform',tr);$('dp').setAttribute('d',d);
+if(t>=sn*.2){sn++;$('gh').insertAdjacentHTML('beforeend',`<g transform="${tr}" opacity=".2"><circle cy="-15" r="3.6" fill="#8a84dc"/><path d="${d}" fill="none" stroke="#8a84dc" stroke-width="3.2" stroke-linecap="round"/></g>`)}
+const vy=VY-g*t,v=Math.hypot(VX,vy),Ep=m*g*h,Ek=.5*m*v*v;
+$('vt').textContent=fmt(t,2);$('vh').textContent=fmt(h,1);$('vv').textContent=fmt(v,1);$('vw').textContent=fmt(LM/I/(2*Math.PI),2);$('vr').textContent=fmt(th/(2*Math.PI),2);
+$('bp').style.width=Math.max(0,Ep/ET*100)+'%';$('bk').style.width=Math.min(100,Ek/ET*100)+'%';
+$('ph').textContent=vy>.15?'Fase naik':vy>-.15?'Puncak lintasan':'Fase turun'}
+function start(){clearTimeout(timer);opened=false;$('sc').hidden=true;$('open').hidden=mode!=='game';$('gh').innerHTML='';$('sp').innerHTML='';t=0;th=0;sn=0;a=0;b=0;I=14;run=true;last=performance.now();requestAnimationFrame(tick)}
+function tick(now){if(!run)return;const dt=Math.min(.05,(now-last)/1000)*(slow?.5:1);last=now;
+const q=tgt(),f=1-Math.exp(-9*dt);a+=(q.a-a)*f;b+=(q.b-b)*f;I+=(q.I-I)*f;th+=LM/I*dt;t+=dt;
+const h=H0+VY*t-.5*g*t*t;
+if(h<=0){run=false;$('ph').textContent='Masuk air';$('sp').innerHTML=`<ellipse class="ring" cx="${X0+VX*t*K}" cy="${YW}" rx="34" ry="7" fill="none" stroke="#fff" stroke-width="3"/>`;score();if(!still&&mode!=='game')timer=setTimeout(start,2400);return}
+draw(h);requestAnimationFrame(tick)}
+document.querySelectorAll('#modes [data-m]').forEach(bt=>bt.onclick=()=>{mode=bt.dataset.m;document.querySelectorAll('#modes [data-m]').forEach(x=>x.setAttribute('aria-pressed',x===bt));start()});
+$('slow').onclick=e=>{slow=!slow;e.currentTarget.setAttribute('aria-pressed',slow)};
+$('again').onclick=start;
+recalc();if(still){draw(H0);$('ph').textContent='Tekan Ulangi untuk memutar'}else start();
+function doOpen(){if(run&&mode==='game')opened=true}
+$('open').onclick=doOpen;document.querySelector('.stage').onclick=doOpen;
+addEventListener('keydown',e=>{if(e.code==='Space'&&mode==='game'&&e.target===document.body){e.preventDefault();doOpen()}});
+$('sh').oninput=e=>{H0=+e.target.value;$('lh').textContent=fmt(H0,1).replace(',0','');recalc();start()};
+$('sv').oninput=e=>{VY=+e.target.value;$('lv').textContent=fmt(VY,1);recalc();start()};
+['real','real','tuck','pike','lurus','lurus'].forEach((md,i)=>{const c=document.querySelectorAll('.cc:not(#qz)')[i];if(!c)return;const b=document.createElement('button');b.className='try';b.textContent='Coba di simulasi';b.onclick=()=>{document.querySelector('#modes [data-m="'+md+'"]').click();document.querySelector('.stage').scrollIntoView({behavior:'smooth',block:'center'})};c.appendChild(b)});
+document.querySelectorAll('#qz [data-q]').forEach(bt=>bt.onclick=()=>{$('qa').textContent=bt.dataset.q==='1'?'Benar! Momen inersia I mengecil, sehingga ω = L/I membesar karena L tetap. Coba mode Meringkuk.':bt.dataset.q==='0'?'Belum tepat. Meringkuk memperkecil I, jadi putaran justru lebih cepat.':'Belum tepat. Lintasan titik berat sudah ditentukan saat tolakan dan tidak bisa diubah di udara.'});
+</script>
+</body>
+</html>
